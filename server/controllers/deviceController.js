@@ -10,7 +10,7 @@ class DeviceController {
       const { img } = req.files;
       let fileName = uuid.v4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
-      const device = await Device.create({ name, price, brandId, img: fileName });
+      const device = await Device.create({ name, price, brandId, typeId, img: fileName });
 
       if (info) {
         info = JSON.parse(info);
@@ -18,15 +18,17 @@ class DeviceController {
           DeviceInfo.create({
             title: i.title,
             description: i.description,
-            device: device.id,
+            deviceId: device.id,
           })
         );
       }
+
       return res.json(device);
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
   }
+
   async getAll(req, res) {
     let { brandId, typeId, limit, page } = req.query;
     page = page || 1;
@@ -47,6 +49,7 @@ class DeviceController {
     }
     return res.json(devices);
   }
+
   async getOne(req, res) {
     const { id } = req.params;
     const device = await Device.findOne({
