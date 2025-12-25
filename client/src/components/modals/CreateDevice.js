@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Modal from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
 import { Context } from "../../index";
 import { createDevice, fetchBrands, fetchDevices, fetchTypes } from "../../http/deviceAPI";
@@ -18,7 +18,7 @@ const CreateDevice = observer(({ show, onHide }) => {
   }, []);
 
   const addInfo = () => {
-    setInfo([...info, { title: "", description: "", number: Data.now() }]);
+    setInfo([...info, { title: "", description: "", number: Date.now() }]);
   };
   const removeInfo = (number) => {
     setInfo(info.filter((i) => i.number !== number));
@@ -27,7 +27,7 @@ const CreateDevice = observer(({ show, onHide }) => {
     setInfo(info.map((i) => (i.number === number ? { ...i, [key]: value } : i)));
   };
   const selectFile = (e) => {
-    setFile(e.taget.files[0]);
+    setFile(e.target.files[0]);
   };
   const addDevice = () => {
     const formData = new FormData();

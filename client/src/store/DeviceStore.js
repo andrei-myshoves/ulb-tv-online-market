@@ -24,10 +24,10 @@ export default class DeviceStore {
     this._devices = devices;
   }
   setSelectedType(type) {
-    this.selectedType = type;
+    this._selectedType = type;
   }
   setSelectedBrand(brand) {
-    this.selectedBrand = brand;
+    this._selectedBrand = brand;
   }
   setPage(page) {
     this._page = page;
