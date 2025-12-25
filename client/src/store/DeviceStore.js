@@ -2,16 +2,14 @@ import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
   constructor() {
-    this._types = [
-      { id: 1, name: "Холодильники" },
-      { id: 2, name: "Смартфоны" },
-    ];
-    this._brands = [
-      { id: 1, name: "Samsung" },
-      { id: 2, name: "Apple" },
-    ];
-    this._devices = [{ id: 1, name: "Iphone 12 pro", price: 25000, rating: 5, img: `https` }];
+    this._types = [];
+    this._brands = [];
+    this._devices = [];
     this._selectedType = {};
+    this._selectedBrand = {};
+    this._page = 1;
+    this._totalCount = 0;
+    this._limit = 3;
     makeAutoObservable(this);
   }
 
@@ -31,6 +29,13 @@ export default class DeviceStore {
   setSelectedBrand(brand) {
     this.selectedBrand = brand;
   }
+  setPage(page) {
+    this._page = page;
+  }
+  setTotalCount(count) {
+    this._totalCount = count;
+  }
+
   get types() {
     return this._types;
   }
@@ -43,7 +48,16 @@ export default class DeviceStore {
   get selectedType() {
     return this._selectedType;
   }
-	get selectedBrand() {
+  get selectedBrand() {
     return this._selectedBrand;
+  }
+  get totalCount() {
+    return this._totalCount;
+  }
+  get page() {
+    return this._page;
+  }
+  get limit() {
+    return this._limit;
   }
 }
